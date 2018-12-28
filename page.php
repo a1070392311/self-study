@@ -5,7 +5,7 @@ function returnPageArray($all_count,$now_page_number,$page_limit,$page_count){//
 	$return['before'] = array();
 	$return['now'] = $now_page_number;
 	$return['after'] = array();
-	$page_number = round($all_count/$page_limit);
+	$page_number = ceil($all_count/$page_limit);
 	$yu = $page_count%2;
 	if($yu){//单数页
 		$before_for_number = 0;
@@ -39,10 +39,16 @@ function returnPageArray($all_count,$now_page_number,$page_limit,$page_count){//
 			$after_for_number = $page_count-$now_page_number;
 		}
 		for($i=0;$i<$before_for_number;$i++){
-			array_unshift($return['before'], $now_page_number-$i-1);
+			if($now_page_number-$i-1 >0){
+				array_unshift($return['before'], $now_page_number-$i-1);
+			}
+			
 		}
 		for($i=0;$i<$after_for_number;$i++){
-			array_push($return['after'], $now_page_number+$i+1);
+			if($now_page_number+$i+1 <= $page_number){
+				array_push($return['after'], $now_page_number+$i+1);
+			}
+			
 		}
 		//return $before_for_number;
 		return $return;
