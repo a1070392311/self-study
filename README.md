@@ -12,7 +12,10 @@ nginx配置https.conf
 	443端口配置
 	location /live/ {
 		proxy_pass http://127.0.0.1:8080/;
+		#允许跨域
+		add_header Access-Control-Allow-Origin *;  
 	}
     location /api/ {
 		proxy_pass http://127.0.0.1:9090/api/v1/streams/;
+		add_header Access-Control-Allow-Origin *;
 	}

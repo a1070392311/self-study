@@ -1,0 +1,65 @@
+https://blog.csdn.net/tdcqfyl/article/details/79023431
+博客地址
+<VirtualHost 0.0.0.0:443>
+    DocumentRoot "/var/www/html"
+    ServerName www.domain.com
+    SSLEngine on
+    SSLCertificateFile /usr/local/apache/conf/2_www.domain.com_cert.crt
+    SSLCertificateKeyFile /usr/local/apache/conf/3_www.domain.com.key
+    SSLCertificateChainFile /usr/local/apache/conf/1_root_bundle.crt
+</VirtualHost>
+这里注意 配置里面 SSLEngine on 必须加上，否则会出现不能验证或者其他报错
+
+总结步骤
+apache服务器
+	1.修改conf/httpd.conf
+	
+		取消ssl及proxy相关注释
+		
+		#LoadModule ssl_module modules/mod_ssl.so （去掉前面的#号）
+		
+		#Include conf/extra/httpd-ssl.conf （去掉前面的#号）
+		
+		#LoadModule proxy_module modules/mod_proxy.so （去掉前面的#号）
+		
+		#LoadModule proxy_http_module modules/mod_proxy_http.so （去掉前面的#号）
+		
+	2. 生成证书
+	
+		设置OPENSSL_CONFIG配置
+		执行命令：set OPENSSL_CONF=..\conf\openssl.cnf
+		
+		生成服务端的key文件
+		执行命令：openssl genrsa -out server.key 1024
+		
+		生成签署申请
+		执行命令：openssl req -new -out server.csr -key server.key
+		
+		生成CA的key文件
+		执行命令：openssl genrsa -out ca.key 1024
+		
+		生成CA自签署证书
+		执行命令：openssl req -new -x509 -days 365 -key ca.key -out ca.crt
+		
+		生成CA的服务器签署证书
+		执行命令：openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key
+		
+		
+		根据提示，手动创建相关目录：
+		在bin下新建demoCA文件夹
+		bin/demoCA
+		在demoCA下新建index.txt
+		bin/demoCA/index.txt
+		在demoCA下新建serial.txt，其内容为01,重命名删除.txt后缀
+		bin/demoCA/serial
+		在demoCA下新建newcerts文件夹
+		bin/demoCA/newcerts
+		
+		接着修改conf/extra/httpd-ssl.conf文件中的如下内容：
+		SSLCertificateFile "xxx/conf/key/server.crt"
+		SSLCertificateKeyFile "xxx/conf/key/server.key"
+		SSLCACertificateFile "xxx/conf/key/ca.crt"
+		#SSLVerifyClient require （去掉前面的#号，进行客户端验证时需要）
+		#SSLVerifyDepth 1 （去掉前面的#号，把10改为1，进行客户端验证时需要)
+
+
