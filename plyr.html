@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <title>HLS Demo</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/plyr/1.9.0/plyr.css">
+	<script src="https://cdn.bootcss.com/plyr/1.9.0/plyr.js"></script>
+    
+	<script src="./flv.js"></script>
+	<style>
+	body{margin:0px;padding:0px;
+		background-color:#fff;
+		background:url('./4k-ba.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+		min-height:100vh;
+	}
+	
+    @media screen and (min-width: 320px) and (max-width: 1156px){
+		.plyr{
+			width:100%;
+			margin: 0 auto;
+		}
+	}
+	@media screen and (min-width: 1156px){
+		.plyr{
+			width:48%;
+			margin: 0 auto;
+		}
+	}
+
+	</style>
+  </head>
+  <body>
+    <video style="width:100%;height:500px;" preload="none" id="player" autoplay controls="controls" crossorigin></video>
+    
+  </body>
+  <script>
+  var player = document.getElementById('player');
+        if (flvjs.isSupported()) {
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: 'https://192.168.121.70/live/h/2.flv'
+				//url:'./2.flv',
+            });
+            flvPlayer.attachMediaElement(player);
+            flvPlayer.load(); //加载
+        }
+		var options = {
+			'controls':['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen'],
+
+			'autoplay':false,
+		};
+	plyr.setup('#player',options);
+ </script>
+</html>
