@@ -1,0 +1,176 @@
+mongodb链接格式
+	mongodb://[username]:[password]@[host:port]/[database_name]
+	eq :  mongodb://test:test@127.0.0.1:27017/admin
+mongodb链接格式 多个参数
+	mongodb://[username]:[password]@[host:port]/[database_name]?key=value;key=value;.....
+	重点参数：authSource=验证数据库名
+创建数据库
+	//如果数据库不存在，则创建数据库，否则切换到指定数据库。
+	use [database_name]    
+查看所有数据库
+	show dbs
+删除当前数据库,默认是test数据库，可以使用db命令查看当前数据库名
+	db.dropDatabase()
+查看当点所有集合
+	show collections
+创建集合
+	db.createCollection([name],{[option]})
+	参数说明
+	name ： 集合名称
+	option：可选参数  
+	
+	option参数(可选)
+			capped boolean 如果为true，则创建固定集合，当达到最大值时，它会覆盖最早的文档，当该值为true时，必须设置size参数
+			autoIndexId boolean 如果为true，自动在_id字段创建索引，默认为false
+			size int 为固定集合设置指定的最大值，单位KB
+			max int  指定固定集合中包含文档的最大数量
+删除集合
+	db.[collection_name].drop()
+添加文档
+	db.[collection_name].insert([doc])
+	db.[collection_name].save([doc])
+	insert()和save()的区别
+		1.insert: 若新增数据的主键已经存在，则会抛 org.springframework.dao.DuplicateKeyException 异常提示主键重复，不保存当前数据。
+		2.save: 若新增数据的主键已经存在，则会对当前已经存在的数据进行修改操作。
+更新文档
+	db.[collection_name].update([criteria],[objNew],[upsert],[multi])
+	参数说明
+		criteria : update的查询条件  类似于sql的where条件
+		objNew ：update的对象和一些更新操作符等，类似于sql 的 set
+		upsert ：如果不存在update的记录，是否插入新纪录，true插入，false不插入
+		multi : 默认为false，只更新找到的第一条记录，如果为true，则更新全部符合条件的记录
+		ep : db.mycol.update(
+				{'userid':4},{'password':'123123'}
+			 )
+		注意：如果criteria没有匹配到任何一条记录，则会插入一条新数据
+删除文档
+	db.[collection_name].remove(
+		<query>,
+		{
+			justOne : boolean，
+			writeConcern : <doc>
+		}
+	)
+	参数说明
+		query : 删除文档的条件
+		justOne : 如果设置为true或1，则只删除一个文档
+		writeConcern : 抛出异常的级别
+查询文档
+	非结构化方式
+		db.[collection_name].find()
+		db.[collection_name].findOne() //只返回一个文档
+	格式化方式
+		db.[collection_name].find().pretty()
+	条件语句
+		等于	{key1:value1}	db.mycol.find({key1:value1})	相当于where key1="value1"
+		小于	{key1:{$lt:value1}}		db.mycol.find({key1:{$lt:value1}})	相当于where key1<value1
+		小于或等于	{key1:{$lte:value1}}	db.mycol.find({key1:{$lte:value1}})		相当于where key1<=value1
+		大于	{key1:{$gt:value1}}		db.mycol.find({key1:{$gt:value1}})		相当于where key1>value1
+		大于等于	{key1:{$gte:value1}}	db.mycol.find({key1:{$gte:value1}})		相当于where key1>=value1
+		不等于	{key1:{$ne:value1}}		db.mycol.find({key1:{$ne:value1}})		相当于where key1<>value1
+	AND条件
+		db.[collection_name].find({key1:value1,key2:value2.....})
+	OR条件
+		查询key1=value1或者key2=value2或者........的结果
+		db.[collection_name].find({
+			$or:[
+				{key1:value1},{key2:value2}........
+			]
+		})
+	AND OR联合使用
+		db.[collection_name].find({
+			{key1:value1} , $or:[{key2:value2},{key3:value3}]
+		})
+	MongoDB $type操作符 用来匹配字段值的类型
+		ep : db.[collection_name].find({'key1':{$type:1}})
+		参数说明$type
+			1	double
+			2	String
+			3	Object
+			4	Array
+			5	Binary data
+			7	Object id
+			8	Boolean
+			9	Date
+			10	Null
+			11	Regular Expression
+			13	JavaScript
+			14	Symbol
+			15	JavaScript(with scope)
+			16	32-bit integer
+			17	Timestamp
+			18	64-bit integer
+			255	Min key
+			127	Max key
+Limit与Skip方法
+	limit() 指定读取的记录数量
+		db.[collection_name].find().limit([int])
+	skip()  指定跳过记录的数量  skip方法默认值为0
+		db.[collection_name].find().limit([int]).skip([int])
+排序
+	sort()方法  指定字段排序，1为升序，-1位降序
+		db.[collection_name].find().order({key1:1})
+索引
+	ensureIndex() 创建索引
+		db.[collection_name].ensureIndex({key:1,key1:1,key2:-1,......},{option})
+		1为升序索引，-1位降序索引
+		option可选参数
+			background	boolean		创建索引过程中会阻塞其他数据库操作，background可指定为后台方式创建索引，默认为false
+			unique	boolean		索引是否唯一，默认为false
+			name	string		索引的名称
+			dropDups	boolean	在建立唯一索引时，是否删除重复记录，默认为false
+			sparse	boolean		对文档中不存在的字段数据不启用索引，如果设置为true，在索引字段中不会查询出不包含对应字段的文档，默认为false
+			expireAfterSeconds	integer		以秒为单位，完成TTL设定，设定集合的生存时间
+			v		index version  索引的版本号
+			weights		document	索引权重值，数值在1到99999之间，表示该索引相对于其他索引字段的得分权重
+			default_language	string	对于文本索引，该参数决定了停用词及词干和词器的规则列表，默认是英语
+			language_override	string	对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的language，默认值为language
+聚合
+	aggregate()  用于处理数据（比如统计平均值，求和等），并返回计算后的数据结果，类似于count(*)
+		db.[collection_name].aggregate(aggregate_operation)
+		参数说明
+		$sum	计算总和	db.mycol.aggregate([{
+								$group:{
+									_id:"$by_user",
+									num_tutorial:{
+										$sum : "$likes"
+									}
+								}
+							}])
+		$avg	计算平均值
+		$min	获取最小值
+		$max	获取最大值
+		$push	在结果文档中插入值到一个数组中	db.mycol.aggregate([{
+													$group:{
+														_id:"$by_user",
+														url:{
+															$push:"$url"
+														}
+													}
+												}])
+		$addToSet	在结果文档中插入值到一个数组中,但不创建副本
+		$first	根据资源文档的排序，获取第一个文档数据  db.mycol.aggregate([{
+															$group:{
+																_id:"$by_user",
+																first_url:{
+																	$first:"$url"
+																}
+															}
+														}])
+		$last	根据资源文档的排序，获取最后一个文档数据
+		管道 ： 在Unix和Linux中一般用于将当前命令的输出结果作为下一个命令的参数
+		MongoDB的集合管道将MongoDB文档在一个文档处理完毕后将结果传递给下一个管道处理，管道操作可重复
+		管道操作符
+			$project	修改输入文档的结构，可以用来重命名，增加或删除域，也可以用于创建计算结果异己嵌套文档。有点类似于sql获取指定字段
+			$match		用于过滤数据
+			$limit		用来限制管道返回的文档数
+			$skip		跳过管道中指定数量的文档
+			$unwind		将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值
+			$group		将文档分组
+			$sort		文档排序
+			$geoNear	输出接近某一地理位置的有序文档
+			
+
+	
+
+	
