@@ -1,0 +1,17 @@
+数据库
+	mysql   （备份，集群，分布式）
+	mongodb	（备份，集群，分布式）
+	PostgreSQL
+	Oracle
+服务器
+	SRS
+	Red5
+	xtrabackup
+	elasticsearch
+	sphinx
+	ffmpeg
+编程
+	swoole
+缓存
+	redis
+	memcache
