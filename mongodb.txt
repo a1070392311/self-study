@@ -57,8 +57,13 @@ mongodb链接格式 多个参数
 		writeConcern : 抛出异常的级别
 查询文档
 	非结构化方式
-		db.[collection_name].find()
-		db.[collection_name].findOne() //只返回一个文档
+		db.[collection_name].find(query,fields,limit,skip)
+		db.[collection_name].findOne(query,fields,limit,skip) //只返回一个文档
+		参数说明
+			query : 查询条件
+			fields : 用于字段映射，指定是否返回该字段，0表示不返回，1表示返回
+			limit : 限制数量
+			skip : 跳过数量
 	格式化方式
 		db.[collection_name].find().pretty()
 	条件语句
@@ -169,6 +174,40 @@ Limit与Skip方法
 			$group		将文档分组
 			$sort		文档排序
 			$geoNear	输出接近某一地理位置的有序文档
+MongoDB在数据库的引用
+	1，手动引用
+		把一个文档的id存进另一个文档的字段里，手动查询两个集合的内容
+	2，DBRefs
+		（不推荐使用，除非使用了nodejs，如果你用 mongoose 的话，可以用 populate 展开那个对象）
+MongoDB查询分析
+	MongoDB 查询分析可以确保我们建议的索引是否有效，是查询语句性能分析的重要工具。
+	MongoDB 查询分析常用函数有：explain() 和 hint()。
+MongoDB原子操作
+	所谓原子操作，就是要么执行成功，要么执行失败，执行成功完成既定任务，执行失败还原执行前的状态
+	方法 ： db.[collection_name].findAndModify({
+				query : {......}， //修改条件
+				update : {
+					操作命令 ：操作内容
+				}
+			})
+	案例详见https://www.cnblogs.com/wangjing666/p/6844204.html
+	原子操作常用命令
+	$set	用来指定一个键并更新键值，若键不存在则创建
+		{$set : {key:value}}
+	$unset	用来删除一个键
+		{$unset : {field:1}}
+	$inc	可以对文档的某个值为数字型的键进行增减操作
+		{$inc : {field:value}}
+	$push	把value追加到field里面，field一定要是数组类型才行，若field不存在，则新增一个数组进去
+		{$push : {field:value}}
+	$pushAll	同$push,一次添加多个值
+		{$pushAll : {field:value_array}}
+	$pull	从数组field内删除一个等于value的值
+		{$pull : {field : _value}}
+	$addToSet	增加一个值到数组内，而且只有当这个值不在数组内才增加。
+
+	
+
 			
 
 	
