@@ -1,0 +1,112 @@
+PostgreSQL数据类型
+	1.数值类型（整数或浮点数的十进制数）
+	2.货币类型
+		money类型存储带有固定小数精度的货币金额
+		numeric，int和bigint的值可以转换为money，不建议使用浮点数处理货币类型，存在舍入错误的可能性
+	3.字符类型
+	4.日期/时间类型
+	5.布尔类型
+	6.枚举类型
+	7.几何类型
+	8.网络地址类型
+	9.位串类型
+	10.文本搜索类型
+	11.uuid类型
+	12.xml类型
+	13.json类型
+	14.数组类型
+	15.复合类型
+	16.范围类型
+	17.对象标识符类型
+	18.伪类型
+创建数据库
+	三种方式
+	1.使用CREATE DATABASE SQL 语句来创建
+		需要在命令行执行
+		CREATE DATABASE [dbname];
+		
+		ep : postgres=# CREATE DATABASE testdb;
+	2.使用createdb命令创建
+		createdb是一个sql命令
+		createdb [option] [dbname[description]]
+		参数说明
+		dbname	数据库名
+		description		新创建数据库的相关说明
+		option	可选参数
+			1，指定数据库默认表空间
+				-D tablespace
+			2，将createdb生成的命令发送到服务端
+				-e
+			3，指定数据库的编码
+				-E encoding
+			4,	指定数据库的语言环境
+				-l locale
+			5,	指定创建此数据库的模板
+				-T template
+			6,	显示createdb命令的帮主信息
+				-help
+			7,	指定服务器的主机名
+				-h host
+			8,	指定服务器监听的端口，或者socket文件
+				-p port
+			9,	连接数据库的用户名
+				-U username
+			10,	忽略输入密码
+				-w
+			11,	强制输入密码
+				-W
+	3.使用pgAdmin工具
+查看所有数据库
+	\l
+选择数据库
+	\c + 数据库名
+删除数据库
+	三种方式
+	1.使用DROP DATABASE 语句
+		DROP DATABASE [IF EXISTS] name
+		会删除数据库的系统目录项，并且删除包含数据的文件目录
+		只能超级管理员或数据库拥有者操作
+		需要在Postgresql命令窗口执行
+		参数说明
+			IF EXISTS ： 如果数据库不存在则发出提示信息而不是错误信息
+			name : 要删除的数据库的名称
+	2.使用dropdb命令
+		dropdb [connection-option...] [option...] dbname
+		参数说明
+		dbname	要删除的数据库名
+		option 可选参数
+			1，显示dropdb生成的命令并发送到数据库服务器
+				-e
+			2，在做删除工作之前发出一个验证提示
+				-i
+			3，打印dropdb版本并退出
+				-V
+			4，如果数据库不存在则发出提示信息而不是错误信息
+				--if-exists
+			5，显示dropdb命令的帮主信息
+				--help
+			6，指定运行服务器的主机名
+				-h host
+			7，指定服务器监听的端口，或者socket文件
+				-p port
+			8,	连接数据库的用户名
+				-U username
+			9,	忽略输入密码
+				-w
+			10,	强制输入密码
+				-W
+			11，删除数据库是指定连接的数据库，默认postgres，如果不存在则使用template1
+				--maintenance-db=dbname
+	3.使用pgAdmin工具
+PostgreSQL创建表格
+	CREATE TABLE table_name(
+		column1 datatype,
+		column2 datatype,
+		...
+		PRIMARY KEY(一个或多个列)
+	);
+	可以使用 \d 命令来查看表格是否创建成功
+	\d tablename 查看表格信息
+PostgreSQL删除表格
+	DROP TABLE table_name;
+	

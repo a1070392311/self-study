@@ -2,6 +2,8 @@
 	mysql   （备份，集群，分布式）
 	mongodb	（备份，集群，分布式）
 	PostgreSQL
+		安装：https://blog.csdn.net/mztyd2018/article/details/89671064?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2
+		命令行工具 ： pgcli
 	Oracle
 服务器
 	SRS
