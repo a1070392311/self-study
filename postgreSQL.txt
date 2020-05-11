@@ -1,3 +1,5 @@
+pgcli 连接数据库
+	pgcli  postgres://postgres:postgres@192.168.159.128:5432
 PostgreSQL数据类型
 	1.数值类型（整数或浮点数的十进制数）
 	2.货币类型
@@ -109,4 +111,34 @@ PostgreSQL创建表格
 	\d tablename 查看表格信息
 PostgreSQL删除表格
 	DROP TABLE table_name;
+PostgreSQL模式（SCHEMA）
+	模式可以被看成一个表的集合，方便管理
+	一个模式可以包含视图、索引、据类型、函数和操作符等。
+	相同的对象名称可以被用于不同的模式中而不会出现冲突,例如 schema1 和 myschema 都可以包含名为 mytable 的表
+	创建模式
+		create table [myschema.mytable](
+			...
+		)
+	删除一个为空的模式
+		drop schema [myschema];
+	删除一个模式和它包含的所有对象
+		drop schema [myschema] cascade;
+插入数据
+	insert into TABLE_NAME (col1,col2....) values (val1,val2,......)
+查询数据
+	select col1,col2,... from table_name;
+修改数据
+	update table_name set col1=val1,col2=val2 ... where [condition]
+删除数据
+	delete from table_name where [condition]
+LIMIT和OFFSET
+	select * from table_name limit 10 offset 1;
+	
+PostgreSQL 约束
+	NOT NULL：指示某列不能存储 NULL 值
+	UNIQUE：确保某列的值都是唯一的
+	PRIMARY Key: 主键
+	FOREIGN Key： 保证一个表中的数据匹配另一个表中的值的参照完整性
+	CHECK： 保证列中的值符合指定的条件
+	EXCLUSION ：排他约束，保证如果将任何两行的指定列或表达式使用指定操作符进行比较，至少其中一个操作符比较将会返回 false 或空值
 	
