@@ -1,0 +1,20 @@
+1,安装elasticsearch
+2，安装Logstash 
+	https://www.jianshu.com/p/8a6086240780
+	
+	配置文件在./jdbc.conf
+3，安装logstash-input-jdbc插件
+	https://blog.csdn.net/liqing0013/article/details/89483409
+4，安装Kibana 
+	https://blog.csdn.net/liqing0013/article/details/89083850
+	
+	
+	启动elasticsearch
+	./bin/elasticsearch
+	启动Logstash
+	./bin/logstash -f ./jdbc.conf
+	启动Kibana 
+	./bin/kibana --allow-root
+	
+	ps –ef | grep mysql
+	

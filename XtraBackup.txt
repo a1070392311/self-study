@@ -1,0 +1,11 @@
+innobackupex --defaults-file=/etc/mysql/my.cnf --user=root --password=root  --parallel=2 --throttle=200 /home/mysql_backupc --socket=/var/run/mysqld/mysqld.sock
+
+
+//修改数据库文件夹权限
+chown -R mysql:mysql /var/lib/mysql_copy
+
+
+恢复
+xtrabackup --prepare --target-dir=/home/mysql_backup/www_baidu_com_copy/2020-05-12_19-57-45
+innobackupex --defaults-file=/etc/mysql/my.cnf  --user=root --password=root --socket=/var/run/mysqld/mysqld.sock --apply-log  --redo-only /home/mysql_backupc/2020-05-12_23-14-46
+innobackupex --defaults-file=/etc/mysql/my.cnf  --user=root --password=root --socket=/var/run/mysqld/mysqld.sock --datadir=/var/lib/mysql_copy --copy-back /home/mysql_backupc/2020-05-12_23-14-46

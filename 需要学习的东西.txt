@@ -1,7 +1,7 @@
 数据库
-	mysql   （备份，集群，分布式）
-	mongodb	（备份，集群，分布式）
-	PostgreSQL
+	#mysql   （备份，集群，分布式）
+	#mongodb	（备份，集群，分布式）
+	#PostgreSQL
 		安装：https://blog.csdn.net/mztyd2018/article/details/89671064?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2
 		命令行工具 ： pgcli
 		启动命令 
@@ -9,10 +9,10 @@
 			/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start
 	Oracle
 服务器
-	SRS
+	#SRS
 	Red5
-	xtrabackup
-	elasticsearch
+	xtrabackup(难)
+	elasticsearch（吃内存）
 	sphinx
 	ffmpeg
 编程
@@ -20,3 +20,7 @@
 缓存
 	redis
 	memcache
+队列mq
+	rabbit mq
+	zero mq
+
