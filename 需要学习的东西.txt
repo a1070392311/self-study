@@ -15,6 +15,8 @@
 	elasticsearch（吃内存）
 	sphinx
 	ffmpeg
+	fastdfs
+		安装   https://www.cnblogs.com/yufeng218/p/8111961.html    只能用于centos，ubuntu一堆报错
 编程
 	swoole
 缓存
