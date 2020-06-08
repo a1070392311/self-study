@@ -1,6 +1,11 @@
 数据库
 	#mysql   （备份，集群，分布式）
 	#mongodb	（备份，集群，分布式）
+		安装 ： https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/   
+		添加用户认证 ： https://www.jianshu.com/p/e41a563fe7a4
+		启动报错，主程序已存在的，https://blog.csdn.net/qq_41420747/article/details/82988472
+		解决错误问题  https://ubuntuqa.com/article/9411.html
+		启动命令 mongod --bind_ip 192.168.159.128 --auth
 	#PostgreSQL
 		安装：https://blog.csdn.net/mztyd2018/article/details/89671064?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2
 		命令行工具 ： pgcli
@@ -9,19 +14,19 @@
 			/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start
 	Oracle
 服务器
-	#SRS
-	Red5
+	#SRS   直播
+	Red5   直播
 	xtrabackup(难)
 	elasticsearch（吃内存）
-	sphinx
-	ffmpeg
-	fastdfs
+	sphinx    
+	ffmpeg	  
+	fastdfs   分布式文件存储
 		安装   https://www.cnblogs.com/yufeng218/p/8111961.html    只能用于centos，ubuntu一堆报错
 编程
-	swoole
+	swoole  php7.1以上
 缓存
-	redis
-	memcache
+	#redis
+	#memcache
 队列mq
 	rabbit mq
 	zero mq
