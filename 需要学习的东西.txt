@@ -15,13 +15,19 @@
 	Oracle
 服务器
 	#SRS   直播
-	Red5   直播
+		安装github
+	#Red5   直播（java+RTMP）原生不支持转flv或者其他的
+		安装https://blog.csdn.net/bo_tao/article/details/75528571
+		完整解决方案
+		https://blog.csdn.net/sha1996118/article/details/79717471?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase
+	EasyDarwin 直播
 	xtrabackup(只能centos7上，ubuntu有问题)
 		安装  https://www.percona.com/doc/percona-xtrabackup/2.4/installation/yum_repo.html    mysql 5.7版本要用2.4以上的
 		简单使用  https://blog.csdn.net/wfs1994/article/details/80399408
 	elasticsearch（吃内存）
-	sphinx    
+	sphinx  （不支持php7）  
 	ffmpeg	  
+		安装   https://www.cnblogs.com/wintercloud/p/11162962.html
 	fastdfs   分布式文件存储
 		安装   https://www.cnblogs.com/yufeng218/p/8111961.html    只能用于centos，ubuntu一堆报错
 编程
@@ -32,4 +38,6 @@
 队列mq
 	rabbit mq
 	zero mq
+	
+随机头像网址 http://lorempixel.com/
 
