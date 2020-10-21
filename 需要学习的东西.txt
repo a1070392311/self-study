@@ -13,6 +13,8 @@
 			su - postgres
 			/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start
 	Oracle
+	
+	Mycat 开源的分布式数据库系统
 服务器
 	#SRS   直播
 		安装github
@@ -39,5 +41,13 @@
 	rabbit mq
 	zero mq
 	
+	
+框架
+	thinkphp
+	yii2
+	ci
+	laravel
+	phalapi
+	swoole
 随机头像网址 http://lorempixel.com/
 
