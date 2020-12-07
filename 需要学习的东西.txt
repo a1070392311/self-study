@@ -52,6 +52,7 @@
 随机头像网址 http://lorempixel.com/
 
 java : 
+	java two-fish	https://www.schneier.com/academic/twofish/
 	Quartz 定时任务框架
 	xxl-job 分布式任务调度平台
 	
