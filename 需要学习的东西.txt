@@ -51,3 +51,8 @@
 	swoole
 随机头像网址 http://lorempixel.com/
 
+java : 
+	Quartz 定时任务框架
+	xxl-job 分布式任务调度平台
+	
+
