@@ -60,4 +60,8 @@ java :
 	Quartz 定时任务框架
 	xxl-job 分布式任务调度平台
 	
+	
+免费的天气api
+	https://www.tianqiapi.com/
+	
 
