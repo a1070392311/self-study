@@ -53,6 +53,7 @@
 
 抓包工具：https://www.telerik.com/fiddler
 markdown文档编辑器：Haroopad
+服务器监控平台：netdata
 java : 
 	java框架 ： spring	springmvc	springcloud		springboot
 	数据库框架：mybatis
