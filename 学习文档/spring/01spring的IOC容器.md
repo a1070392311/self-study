@@ -116,12 +116,12 @@ bean的属性
 class        | 指定bean类
 name        | bean的唯一标识符
 scope|bean的作用域
-constructor-arg|
-properties|
-autowiring mode|
+constructor-arg|构造函数依赖注入
+property|设值函数的依赖注入
+autowiring mode|自动装配
 lazy-init|
-init-method|
-destroy-method|
+init-method|初始化回调
+destroy-method|销毁回调
 
 ###bean的作用域
 作用域属性值
