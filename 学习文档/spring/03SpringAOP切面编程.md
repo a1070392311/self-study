@@ -527,3 +527,123 @@ public class RunBean {
 
 </beans>
 ```
+
+##AspectJ AOP框架的注解使用方式
+接口类
+```java
+package test.aspectAnno;
+
+public interface IUserService {
+    public String AddUser();
+    public String InsertUser();
+    public String DeleteUser();
+}
+
+```
+实现类
+```java
+package test.aspectAnno;
+
+import org.springframework.stereotype.Service;
+
+@Service("userService")
+public class UserService implements IUserService {
+    public String AddUser() {
+        System.out.println("add a user");
+        return "AddUser";
+    }
+
+    public String InsertUser() {
+        System.out.println("insert a user");
+        return "InsertUser";
+    }
+
+    public String DeleteUser() {
+        System.out.println("delete a user");
+        return "DeleteUser";
+    }
+}
+
+```
+切面类
+```java
+package test.aspectAnno;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class MyAspect {
+    //这里使用方法名，相当于引用
+    //@Before("Myspect()")
+    public void before(JoinPoint joinPoint){
+        System.out.println("这里是方法执行之前的操作,当前执行方法名"+joinPoint.getSignature().getName());
+    }
+    //声明切入点
+    @Pointcut("execution(* test.aspectAnno.*.*(..))")
+    private void Myspect(){
+
+    }
+    //@AfterReturning(value = "Myspect()", returning = "myreturn")
+    public void after_returning(JoinPoint joinPoint , Object myreturn){
+        System.out.println("这里后置通知方法,当前执行方法名"+joinPoint.getSignature().getName()+" 方法返回值"+myreturn.toString());
+    }
+    //@After("Myspect()")
+    public void after(JoinPoint joinPoint){
+        System.out.println("这里最终方法");
+    }
+    //@Around("Myspect()")
+    public Object around(ProceedingJoinPoint point) throws Throwable{
+        System.out.println("前");
+        Object proceed = point.proceed();
+        System.out.println("后");
+        return proceed;
+    }
+    //@AfterThrowing(value = "execution(* test.aspectAnno.*.*(..))" , throwing = "myth")
+    public void thro(JoinPoint joinPoint , Throwable myth){
+        System.out.println("这里是抛出异常操作"+myth.getMessage());
+    }
+}
+
+```
+调用类
+```java
+package test.aspectAnno;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class RunBean {
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:aop-aspectAnno.xml");
+        //这里还是多态，要注意
+        IUserService userService = (IUserService) applicationContext.getBean("userService");
+        userService.AddUser();
+        userService.DeleteUser();
+        userService.InsertUser();
+    }
+}
+
+```
+配置文件
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启注解扫描-->
+    <context:component-scan base-package="test.aspectAnno"></context:component-scan>
+    <!--aspectj自动加载-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+</beans>
+```
