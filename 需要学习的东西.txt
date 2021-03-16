@@ -65,4 +65,6 @@ java :
 免费的天气api
 	https://www.tianqiapi.com/
 	
+开源运维平台 https://www.spug.dev/
+	
 
