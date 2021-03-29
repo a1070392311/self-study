@@ -1,5 +1,9 @@
 #Quartz配置及入门案例
 [toc]
+详细链接https://blog.csdn.net/qwe6112071/article/details/50991563?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161698326916780265482980%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=161698326916780265482980&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-4-50991563.pc_v2_rank_blog_default&utm_term=quartz
+
+在这个人的文章中搜索quartz
+https://blog.csdn.net/qwe6112071
 ##安装
 Maven导入
 ```xml
