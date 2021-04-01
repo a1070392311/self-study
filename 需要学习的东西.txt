@@ -26,7 +26,8 @@
 	xtrabackup(只能centos7上，ubuntu有问题)
 		安装  https://www.percona.com/doc/percona-xtrabackup/2.4/installation/yum_repo.html    mysql 5.7版本要用2.4以上的
 		简单使用  https://blog.csdn.net/wfs1994/article/details/80399408
-	elasticsearch（吃内存）
+	elasticsearch（吃内存）全文搜索引擎
+	xunsearch 全文搜索引擎
 	sphinx  （不支持php7）  
 	ffmpeg	  
 		安装   https://www.cnblogs.com/wintercloud/p/11162962.html
