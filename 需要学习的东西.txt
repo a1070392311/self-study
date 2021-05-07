@@ -6,6 +6,7 @@
 		启动报错，主程序已存在的，https://blog.csdn.net/qq_41420747/article/details/82988472
 		解决错误问题  https://ubuntuqa.com/article/9411.html
 		启动命令 mongod --bind_ip 192.168.159.128 --auth
+		mongod管理工具http://mms.litixsoft.de/index.php?lang=de/
 	#PostgreSQL
 		安装：https://blog.csdn.net/mztyd2018/article/details/89671064?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2
 		命令行工具 ： pgcli
