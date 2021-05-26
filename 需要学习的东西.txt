@@ -32,8 +32,12 @@
 	sphinx  （不支持php7）  
 	ffmpeg	  
 		安装   https://www.cnblogs.com/wintercloud/p/11162962.html
-	fastdfs   分布式文件存储
-		安装   https://www.cnblogs.com/yufeng218/p/8111961.html    只能用于centos，ubuntu一堆报错
+	#fastdfs   分布式文件存储（放弃）
+	#	安装   https://www.cnblogs.com/yufeng218/p/8111961.html    只能用于centos，ubuntu一堆报错
+	minio 分布式文件存储（开销少，先用这个）
+		https://docs.min.io/  官网
+	SeaweedFS 分布式文件存储
+		https://github.com/chrislusf/seaweedfs
 编程
 	swoole  php7.1以上
 缓存
